@@ -7,7 +7,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 // Assets
-import Logo from "@/public/assets/favicon/ChatGPT Image Nov 22, 2025, 12_35_49 PM.png";
+import Logo from "@/public/assets/favicon/recipet.png";
 
 // ShadCn
 import { Card } from "@/components/ui/card";
@@ -98,10 +98,10 @@ const BaseNavbar = () => {
                         <Image
                             src={Logo}
                             alt="RGen Logo"
-                            width={120}
-                            height={60}
+                            width={40}
+                            height={40}
                             loading="eager"
-                            style={{ height: "auto" }}
+                            className="object-contain"
                         />
                     </Link>
                     
@@ -167,10 +167,10 @@ const BaseNavbar = () => {
                                     <Image
                                         src={Logo}
                                         alt="RGen Logo"
-                                        width={80}
+                                        width={40}
                                         height={40}
                                         loading="eager"
-                                        style={{ height: "auto" }}
+                                        className="object-contain"
                                     />
                                     <ThemeSwitcher />
                                 </div>
