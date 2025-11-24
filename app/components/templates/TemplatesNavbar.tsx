@@ -11,18 +11,22 @@ import Logo from "@/public/assets/img/invoify-logo.svg";
 const TemplatesNavbar = () => {
     return (
         <header className="w-full bg-white dark:bg-gray-800 border-b">
-            <nav className="container mx-auto px-4">
-                <Card className="flex flex-wrap justify-between items-center px-6 py-3 gap-5 border-0 shadow-none">
+            <nav className="container mx-auto px-4 max-w-6xl">
+                <Card className="flex flex-wrap justify-between items-center px-4 py-2 gap-4 border-0 shadow-none">
                     <Link href="/" className="flex items-center">
                         <div className="flex items-center gap-2">
-                            <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
-                                <span className="text-white font-bold text-sm">C</span>
-                            </div>
-                            <span className="text-xl font-bold text-blue-600">Create Receipt</span>
+                            <Image 
+                                src="/assets/favicon/recipet.png"
+                                alt="Receipt Logo"
+                                width={24}
+                                height={24}
+                                className="object-contain"
+                            />
+                            <span className="text-lg font-bold text-blue-600">RGen</span>
                         </div>
                     </Link>
 
-                    <div className="flex items-center gap-6">
+                    <div className="flex items-center gap-4">
                         <Link href="/">
                             <Button variant="ghost" className="text-gray-600 hover:text-blue-600">
                                 Home
@@ -72,11 +76,11 @@ const TemplatesNavbar = () => {
                         </Link>
                     </div>
 
-                    <div className="flex items-center gap-3">
-                        <Button variant="outline" className="border-blue-600 text-blue-600 hover:bg-blue-50">
+                    <div className="flex items-center gap-2">
+                        <Button variant="outline" className="border-gradient-to-r border-purple-500 text-purple-600 hover:bg-purple-50">
                             LOGIN
                         </Button>
-                        <Button className="bg-blue-600 hover:bg-blue-700 text-white">
+                        <Button className="bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600 hover:from-blue-700 hover:via-purple-700 hover:to-blue-700 text-white border-0">
                             SIGN UP
                         </Button>
                     </div>
