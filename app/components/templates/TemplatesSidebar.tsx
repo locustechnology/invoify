@@ -36,9 +36,9 @@ const menuItems = [
         hasSubmenu: true,
         subItems: [
             { label: "McDonald's Receipt", href: "/en/receipt-builder?template=3" },
-            { label: "Subway Receipt", href: "/en/receipt-builder?template=4" },
-            { label: "Starbucks Receipt", href: "/en/receipt-builder?template=5" },
-            { label: "Popeyes Receipt", href: "/en/receipt-builder?template=7" }
+            { label: "Subway Receipt", href: "/en/fastfood/subway" },
+            { label: "Starbucks Receipt", href: "/en/fastfood/starbucks" },
+            { label: "Popeyes Receipt", href: "/en/fastfood/popeyes" }
         ]
     },
     { 
@@ -47,10 +47,10 @@ const menuItems = [
         href: "/en?category=retail", 
         hasSubmenu: true,
         subItems: [
-            { label: "Walmart Receipt", href: "/en/receipt-builder?template=8" },
-            { label: "StockX Receipt", href: "/en/receipt-builder?template=9" },
-            { label: "Louis Vuitton Receipt", href: "/en/receipt-builder?template=11" },
-            { label: "Uber Eats Receipt", href: "/en/receipt-builder?template=6" }
+            { label: "Walmart Receipt", href: "/en/retail/walmart" },
+            { label: "StockX Receipt", href: "/en/retail/stockx" },
+            { label: "Louis Vuitton Receipt", href: "/en/luxury/louis-vuitton" },
+            { label: "Uber Eats Receipt", href: "/en/delivery/uber-eats" }
         ]
     },
     { 
@@ -123,7 +123,7 @@ const TemplatesSidebar = () => {
                                     variant={isActive ? "default" : "ghost"}
                                     className={`w-full justify-start gap-3 h-12 ${
                                         isActive 
-                                            ? "bg-blue-600 text-white hover:bg-blue-700" 
+                                        ? "bg-blue-600 text-white hover:bg-blue-700" 
                                             : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
                                     }`}
                                     onClick={() => item.hasSubmenu && toggleExpanded(item.label)}

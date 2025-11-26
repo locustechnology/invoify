@@ -43,7 +43,7 @@ const BillFromSection = () => {
         <section className="flex flex-col gap-3">
             <FormInput
                 name="sender.name"
-                label={_t("form.steps.fromAndTo.billFrom") + " " + _t("form.steps.fromAndTo.name")}
+                label={_t("form.steps.fromAndTo.name")}
                 placeholder="Your name"
             />
             <FormInput

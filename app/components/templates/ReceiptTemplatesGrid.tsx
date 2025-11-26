@@ -312,19 +312,19 @@ const ReceiptTemplatesGrid = () => {
             case 3:
                 return `/${locale}/receipt-builder?template=3`;
             case 4:
-                return `/${locale}/receipt-builder?template=4`;
+                return `/${locale}/fastfood/subway`;
             case 5:
-                return `/${locale}/receipt-builder?template=5`;
+                return `/${locale}/fastfood/starbucks`;
             case 6:
-                return `/${locale}/receipt-builder?template=6`;
+                return `/${locale}/delivery/uber-eats`;
             case 7:
-                return `/${locale}/receipt-builder?template=7`;
+                return `/${locale}/fastfood/popeyes`;
             case 8:
-                return `/${locale}/receipt-builder?template=8`;
+                return `/${locale}/retail/walmart`;
             case 9:
-                return `/${locale}/receipt-builder?template=9`;
+                return `/${locale}/retail/stockx`;
             case 11:
-                return `/${locale}/receipt-builder?template=11`;
+                return `/${locale}/luxury/louis-vuitton`;
             default:
                 return `/${locale}/receipt-builder`;
         }

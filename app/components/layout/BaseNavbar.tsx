@@ -28,6 +28,7 @@ import { useSidebar } from '@/contexts/SidebarContext';
 // Mobile menu items (same as sidebar)
 const mobileMenuItems = [
     { icon: Home, label: "Home", href: "/en", hasSubmenu: false },
+    { icon: FileText, label: "Receipt Organizer", href: "/en/receipt-organizer", hasSubmenu: false },
     { 
         icon: ChefHat, 
         label: "Fast Food", 
@@ -98,8 +99,8 @@ const BaseNavbar = () => {
                         <Image
                             src={Logo}
                             alt="RGen Logo"
-                            width={40}
-                            height={40}
+                            width={80}
+                            height={80}
                             loading="eager"
                             className="object-contain"
                         />
@@ -118,6 +119,12 @@ const BaseNavbar = () => {
                             className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                         >
                             Create Invoice
+                        </Link>
+                        <Link 
+                            href="/en/receipt-organizer" 
+                            className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                        >
+                            Receipt Organizer
                         </Link>
                         <Link 
                             href="/en/contact" 
@@ -167,8 +174,8 @@ const BaseNavbar = () => {
                                     <Image
                                         src={Logo}
                                         alt="RGen Logo"
-                                        width={40}
-                                        height={40}
+                                        width={70}
+                                        height={70}
                                         loading="eager"
                                         className="object-contain"
                                     />
