@@ -16,6 +16,39 @@ const receiptTemplates = [
         category: "fast-food"
     },
     {
+        id: 5,
+        title: "Starbucks Receipt",
+        preview: "⭐ STARBUCKS\nCoffee Company\n\nStore # 47089\n123 Main Street\nSeattle, WA 98101\nPhone: (206) 555-0123\n\nCHK 742896\n11/19/2025 12:34:56 PM\nCashier: Sarah M\nRegister: 1\n\nORDER #47089-240\nFor Here\nMobile Order & Pay\n\nGrande Pike Place Roast\n• No Room\n• Hot                     $2.45\n\nBlueberry Muffin\n• Warmed                 $3.25\n\nVenti Iced Caramel Macchiato\n• 2% Milk\n• Extra Hot\n• 2 Pumps Vanilla        $5.75\n\nSubtotal                 $11.45\nTax                       $1.03\nTotal                    $12.48\n\nVisa Credit **** 4567    $12.48\n\n⭐ STARBUCKS REWARDS ⭐\nBalance before: 125 Stars\nStars earned: +25\nCurrent balance: 150 Stars\n\nThank you for visiting!\nRate your experience at\nmystarbucksvisit.com",
+        category: "coffee",
+        data: {
+            storeName: "Starbucks Store # 47089",
+            phone: "(206) 555-0123",
+            storeAddress: "123 Main Street, Seattle, WA 98101",
+            date: "2025-11-19",
+            time: "12:34:56",
+            cashier: "Sarah M",
+            registerNumber: "Register: 1",
+            orderNumber: "ORDER #47089-240",
+            items: [
+                { id: "1", name: "Grande Pike Place Roast", quantity: 1, price: 2.45, notes: "No Room, Hot" },
+                { id: "2", name: "Blueberry Muffin", quantity: 1, price: 3.25, notes: "Warmed" },
+                { id: "3", name: "Venti Iced Caramel Macchiato", quantity: 1, price: 5.75, notes: "2% Milk, Extra Hot, 2 Pumps Vanilla" }
+            ],
+            subtotal: 11.45,
+            tax: 1.03,
+            total: 12.48,
+            paymentMethod: "Visa Credit **** 4567",
+            rewardsInfo: {
+                previousBalance: 125,
+                starsEarned: 25,
+                currentBalance: 150
+            },
+            customMessages: {
+                bottom: "Thank you for visiting! Rate your experience at mystarbucksvisit.com"
+            }
+        }
+    },
+    {
         id: 2,
         title: "Coffee Receipt",
         preview: "Coffee House\n325 W 49th\nAustin, TX        (333)321-3333\n\nCHK  567141\n02/17/2017  09:13 AM\nG8372   Drawer#1  Rcpt#\n\nAmericano                    $3.74\nSteamed Milk                 $1.00\n\n*********************\nSUBTOTAL               $4.78\nTAX                    $0.30\nTOTAL                  $4.78\nCHANGE DUE             $0.00\n\n*********************\n02/17/2017  09:13 AM\n\nGet your 10th cup free! Join\nour frequent Coffee Club\nonline.",
@@ -50,39 +83,6 @@ const receiptTemplates = [
             paymentMethod: "Visa",
             customMessages: {
                 bottom: "Take one min survey @ tellsubway.in and get a free cookie on next purchase."
-            }
-        }
-    },
-    {
-        id: 5,
-        title: "Starbucks Receipt",
-        preview: "⭐ STARBUCKS\nCoffee Company\n\nStore # 47089\n123 Main Street\nSeattle, WA 98101\nPhone: (206) 555-0123\n\nCHK 742896\n11/19/2025 12:34:56 PM\nCashier: Sarah M\nRegister: 1\n\nORDER #47089-240\nFor Here\nMobile Order & Pay\n\nGrande Pike Place Roast\n• No Room\n• Hot                     $2.45\n\nBlueberry Muffin\n• Warmed                 $3.25\n\nVenti Iced Caramel Macchiato\n• 2% Milk\n• Extra Hot\n• 2 Pumps Vanilla        $5.75\n\nSubtotal                 $11.45\nTax                       $1.03\nTotal                    $12.48\n\nVisa Credit **** 4567    $12.48\n\n⭐ STARBUCKS REWARDS ⭐\nBalance before: 125 Stars\nStars earned: +25\nCurrent balance: 150 Stars\n\nThank you for visiting!\nRate your experience at\nmystarbucksvisit.com",
-        category: "coffee",
-        data: {
-            storeName: "Starbucks Store # 47089",
-            phone: "(206) 555-0123",
-            storeAddress: "123 Main Street, Seattle, WA 98101",
-            date: "2025-11-19",
-            time: "12:34:56",
-            cashier: "Sarah M",
-            registerNumber: "Register: 1",
-            orderNumber: "ORDER #47089-240",
-            items: [
-                { id: "1", name: "Grande Pike Place Roast", quantity: 1, price: 2.45, notes: "No Room, Hot" },
-                { id: "2", name: "Blueberry Muffin", quantity: 1, price: 3.25, notes: "Warmed" },
-                { id: "3", name: "Venti Iced Caramel Macchiato", quantity: 1, price: 5.75, notes: "2% Milk, Extra Hot, 2 Pumps Vanilla" }
-            ],
-            subtotal: 11.45,
-            tax: 1.03,
-            total: 12.48,
-            paymentMethod: "Visa Credit **** 4567",
-            rewardsInfo: {
-                previousBalance: 125,
-                starsEarned: 25,
-                currentBalance: 150
-            },
-            customMessages: {
-                bottom: "Thank you for visiting! Rate your experience at mystarbucksvisit.com"
             }
         }
     },
@@ -262,6 +262,7 @@ const ReceiptTemplatesGrid = () => {
     const searchParams = useSearchParams();
     const locale = params.locale as string || "en";
     const [selectedCategory, setSelectedCategory] = useState("All Templates");
+    const [searchQuery, setSearchQuery] = useState("");
 
     useEffect(() => {
         const category = searchParams.get('category');
@@ -286,47 +287,64 @@ const ReceiptTemplatesGrid = () => {
 
     const filteredTemplates = () => {
         const category = searchParams.get('category');
-        if (!category) return receiptTemplates;
+        let templates = receiptTemplates;
         
-        switch(category) {
-            case 'fast-food':
-                return receiptTemplates.filter(t => 
-                    t.category === 'fast-food' || t.category === 'coffee'
-                );
-            case 'retail':
-                return receiptTemplates.filter(t => 
-                    t.category === 'retail' || t.category === 'ecommerce' || 
-                    t.category === 'luxury' || t.category === 'delivery'
-                );
-            case 'invoices':
-                return receiptTemplates.filter(t => 
-                    t.category === 'invoice'
-                );
-            default:
-                return receiptTemplates;
+        // Filter by category first
+        if (category) {
+            switch(category) {
+                case 'fast-food':
+                    templates = templates.filter(t => 
+                        t.category === 'fast-food' || t.category === 'coffee'
+                    );
+                    break;
+                case 'retail':
+                    templates = templates.filter(t => 
+                        t.category === 'retail' || t.category === 'ecommerce' || 
+                        t.category === 'luxury' || t.category === 'delivery'
+                    );
+                    break;
+                case 'invoices':
+                    templates = templates.filter(t => 
+                        t.category === 'invoice'
+                    );
+                    break;
+                default:
+                    break;
+            }
         }
+        
+        // Filter by search query
+        if (searchQuery.trim()) {
+            const query = searchQuery.toLowerCase().trim();
+            templates = templates.filter(t => 
+                t.title.toLowerCase().includes(query) ||
+                (t.preview && t.preview.toLowerCase().includes(query))
+            );
+        }
+        
+        return templates;
     };
 
     const getTemplateLink = (templateId: number) => {
         switch (templateId) {
             case 3:
-                return `/${locale}/receipt-builder?template=3`;
+                return `/receipt-builder?template=3`;
             case 4:
-                return `/${locale}/receipt-builder?template=4`;
+                return `/fastfood/subway`;
             case 5:
-                return `/${locale}/receipt-builder?template=5`;
+                return `/fastfood/starbucks`;
             case 6:
-                return `/${locale}/receipt-builder?template=6`;
+                return `/delivery/uber-eats`;
             case 7:
-                return `/${locale}/receipt-builder?template=7`;
+                return `/fastfood/popeyes`;
             case 8:
-                return `/${locale}/receipt-builder?template=8`;
+                return `/retail/walmart`;
             case 9:
-                return `/${locale}/receipt-builder?template=9`;
+                return `/retail/stockx`;
             case 11:
-                return `/${locale}/receipt-builder?template=11`;
+                return `/luxury/louis-vuitton`;
             default:
-                return `/${locale}/receipt-builder`;
+                return `/receipt-builder`;
         }
     };
 
@@ -334,7 +352,7 @@ const ReceiptTemplatesGrid = () => {
         <div className="flex-1 p-3 md:p-6">
             <div className="mb-4 md:mb-6">
                 <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4 gap-4">
-                    <h1 className="text-2xl md:text-3xl font-bold text-blue-600">
+                    <h1 className="text-2xl font-semibold text-gray-900 dark:text-gray-100">
                         {selectedCategory}
                     </h1>
                     <div className="relative w-full md:w-80">
@@ -343,6 +361,8 @@ const ReceiptTemplatesGrid = () => {
                             type="text"
                             placeholder="Search Receipt"
                             className="pl-10"
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
                         />
                     </div>
                 </div>
